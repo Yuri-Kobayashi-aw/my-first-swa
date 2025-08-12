@@ -11,14 +11,44 @@
 <body>
     <main>
     <h1>Vanilla JavaScript App</h1>
-    <p>Loading content from the API: <b id="name">...</b></p>
+    <p>API結果: <b id="name">...</b></p>
+    
+    <div>
+        <input type="text" id="nameInput" placeholder="名前を入力" />
+        <button onclick="callApi()">テスト</button>
+    </div>
     </main>
 
     <script>
+    // 初期ロード
     (async function() {
-        const { text } = await( await fetch(`/api/message`)).json();
-        document.querySelector('#name').textContent = text;
-    }());
+        await callApi();
+    })();
+
+    // API呼び出し関数
+    async function callApi() {
+        const nameElement = document.querySelector('#name');
+        const nameInput = document.querySelector('#nameInput');
+        const name = nameInput.value.trim();
+        
+        try {
+            nameElement.textContent = 'Loading...';
+            
+            const url = name ? `/api/message?name=${encodeURIComponent(name)}` : '/api/message';
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const message = await response.text();
+            nameElement.textContent = message;
+            
+        } catch (error) {
+            console.error('Error:', error);
+            nameElement.textContent = 'Error loading data';
+        }
+    }
     </script>
 </body>
 
