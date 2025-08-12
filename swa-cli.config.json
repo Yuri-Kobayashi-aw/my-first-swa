@@ -3,6 +3,7 @@
   "configurations": {
     "my-first-swa": {
       "appLocation": "src",
+      "apiLocation": "api",
       "outputLocation": ".",
       "appName": "stapp-sgis-test",
       "resourceGroup": "rg-sgis-test"
