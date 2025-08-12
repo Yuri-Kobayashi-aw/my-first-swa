@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "my-first-swa": {
+      "appLocation": "src",
+      "outputLocation": ".",
+      "appName": "stapp-sgis-test",
+      "resourceGroup": "rg-sgis-test"
+    }
+  }
+}
